@@ -1,5 +1,5 @@
 import MapTile from "@/tiles/MapTile";
-import OrdersTile from "@/tiles/OrdersTile";
+import TrucksTile from "@/tiles/TrucksTile";
 import { IconName } from "lucide-react/dynamic";
 
 type TileRepositoryElementType = "map" | "trucks";
@@ -26,7 +26,7 @@ const TILE_METADATA_MAPPING = new Map<
   ]
 >([
   ["map", [MapTile, "Map", "map"]],
-  ["trucks", [OrdersTile, "Trucks", "truck"]],
+  ["trucks", [TrucksTile, "Trucks", "truck"]],
 ]);
 
 export type {
