@@ -1,7 +1,7 @@
-import Map, { MapRef } from "react-map-gl/mapbox";
-import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import useResizeObserver from "@react-hook/resize-observer";
+import Map, { MapRef } from "react-map-gl/maplibre";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 const useSize = (target: React.RefObject<HTMLElement>) => {
   const [size, setSize] = useState<DOMRectReadOnly | null>();
@@ -17,8 +17,6 @@ const useSize = (target: React.RefObject<HTMLElement>) => {
   return size;
 };
 
-const accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
-
 type MapTileProps = {
   id: string;
 };
@@ -28,10 +26,11 @@ const MapTile = ({ id }: MapTileProps) => {
   const mapRef = useRef<MapRef>(null);
   const size = useSize(containerRef);
 
-  const [viewState, setViewState] = useState({
-    longitude: -100,
-    latitude: 40,
-    zoom: 3.5,
+  const [viewState] = useState({
+    //39.1031° N, 84.5120° W
+    longitude: -84.512,
+    latitude: 39.1031,
+    zoom: 13,
   });
 
   /**
@@ -50,14 +49,12 @@ const MapTile = ({ id }: MapTileProps) => {
       ref={containerRef}
     >
       <Map
-        key={id}
+        attributionControl={false}
+        initialViewState={viewState}
         ref={mapRef}
-        mapboxAccessToken={accessToken}
-        {...viewState}
-        onMove={(evt) => setViewState(evt.viewState)}
-        projection={"globe"}
         style={{ width: "100%", height: "100%" }}
-        mapStyle="mapbox://styles/yakovliam/cm79dhzn4001001s0gnhd94wx/draft"
+        mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
+        // mapStyle={"https://geoserveis.icgc.cat/contextmaps/icgc.json"}
       />
     </div>
   );

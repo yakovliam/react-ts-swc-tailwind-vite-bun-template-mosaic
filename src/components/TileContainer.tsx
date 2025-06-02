@@ -7,8 +7,10 @@ import {
 import { useMosaicWindowProvider } from "@/hooks/use-mosaic-window-provider";
 import useMosaicStateManager from "@/hooks/use-mosaic-state-manager";
 import NoWindowsScreen from "./NoWindowsScreen";
-import MosaicWindowToolbarControlButton from "./MosaicWindowToolbarControlButton";
-import { PanelLeftOpen, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
+import MosaicWindowToolbarControlSplitWindowButton from "./toolbar/MosaicWindowToolbarControlSelectButton";
+import MosaicWindowToolbarControlButton from "./toolbar/MosaicWindowToolbarControlButton";
+import { TileRepositoryElementType } from "@/types/tile-repository";
 
 const TileContainer = () => {
   const { provider } = useMosaicWindowProvider();
@@ -17,8 +19,8 @@ const TileContainer = () => {
     onNodeChange,
     addTileToTopRight,
     removeTile,
-    repositoryAndNodeAreEmpty,
     addTileAtPath,
+    repositoryAndNodeAreEmpty,
   } = useMosaicStateManager();
 
   if (repositoryAndNodeAreEmpty) {
@@ -42,13 +44,13 @@ const TileContainer = () => {
           <MosaicWindow
             toolbarControls={[
               ...toolbarControls,
-              <MosaicWindowToolbarControlButton
-                icon={<PanelLeftOpen size={18} />}
-                onClick={() => {
-                  addTileAtPath(path, "map");
+              <MosaicWindowToolbarControlSplitWindowButton
+                splitWindow={(type: TileRepositoryElementType) => {
+                  addTileAtPath(_path, type);
                 }}
               />,
               <MosaicWindowToolbarControlButton
+                variant="destructive"
                 icon={<Trash2 size={18} />}
                 onClick={() => {
                   removeTile(path);

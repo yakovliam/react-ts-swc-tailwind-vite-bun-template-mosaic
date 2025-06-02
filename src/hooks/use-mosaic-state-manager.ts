@@ -1,8 +1,7 @@
 import { useTileRepositoryStore } from "@/state/tile-repository-store";
 import { useTileStore } from "@/state/tile-store";
 import {
-  TILE_REPOSITORY_COMPONENT_MAPPING,
-  TILE_REPOSITORY_TITLE_MAPPING,
+  TILE_METADATA_MAPPING,
   TileRepositoryElementType,
 } from "@/types/tile-repository";
 import { createRootMosaicNode, generateNodeId } from "@/utils/mosaic-node-util";
@@ -46,9 +45,10 @@ const useMosaicStateManager = (): MosaicStateManager => {
     tileId: string,
     type: TileRepositoryElementType
   ) => {
+    const tileMapping = TILE_METADATA_MAPPING.get(type);
     // select the component by the type
-    const component = TILE_REPOSITORY_COMPONENT_MAPPING.get(type);
-    const title = TILE_REPOSITORY_TITLE_MAPPING.get(type);
+    const component = tileMapping?.[0];
+    const title = tileMapping?.[1];
 
     if (!component) {
       throw new Error("Component not found");

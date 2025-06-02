@@ -1,7 +1,8 @@
 import MapTile from "@/tiles/MapTile";
 import OrdersTile from "@/tiles/OrdersTile";
+import { IconName } from "lucide-react/dynamic";
 
-type TileRepositoryElementType = "map" | "orders";
+type TileRepositoryElementType = "map" | "trucks";
 
 type TileRepositoryElementComponentProps = {
   id: string;
@@ -16,20 +17,16 @@ type TileRepositoryElement = {
   title: string;
 };
 
-const TILE_REPOSITORY_COMPONENT_MAPPING = new Map<
+const TILE_METADATA_MAPPING = new Map<
   TileRepositoryElementType,
-  React.ComponentType<TileRepositoryElementComponentProps>
+  [
+    React.ComponentType<TileRepositoryElementComponentProps>, // component
+    string, // title
+    IconName // icon name (lucide)
+  ]
 >([
-  ["map", MapTile],
-  ["orders", OrdersTile],
-]);
-
-const TILE_REPOSITORY_TITLE_MAPPING = new Map<
-  TileRepositoryElementType,
-  string
->([
-  ["map", "Map"],
-  ["orders", "Orders"],
+  ["map", [MapTile, "Map", "map"]],
+  ["trucks", [OrdersTile, "Trucks", "truck"]],
 ]);
 
 export type {
@@ -38,4 +35,4 @@ export type {
   TileRepositoryElement,
 };
 
-export { TILE_REPOSITORY_COMPONENT_MAPPING, TILE_REPOSITORY_TITLE_MAPPING };
+export { TILE_METADATA_MAPPING };
