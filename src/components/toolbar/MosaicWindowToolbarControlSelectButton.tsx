@@ -12,7 +12,7 @@ import {
 
 import { DynamicIcon } from "lucide-react/dynamic";
 
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import {
   TILE_METADATA_MAPPING,
   TileRepositoryElementType,
