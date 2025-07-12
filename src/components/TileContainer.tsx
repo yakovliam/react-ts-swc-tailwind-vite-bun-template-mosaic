@@ -45,11 +45,13 @@ const TileContainer = () => {
             toolbarControls={[
               ...toolbarControls,
               <MosaicWindowToolbarControlSplitWindowButton
+                key="mosaic-window-toolbar-control-split-window-button"
                 splitWindow={(type: TileRepositoryElementType) => {
                   addTileAtPath(_path, type);
                 }}
               />,
               <MosaicWindowToolbarControlButton
+                key="mosaic-window-toolbar-control-delete-button"
                 variant="destructive"
                 icon={<Trash2 size={18} />}
                 onClick={() => {

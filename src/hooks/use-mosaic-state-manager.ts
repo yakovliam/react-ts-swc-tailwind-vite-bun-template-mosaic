@@ -4,7 +4,7 @@ import {
   TILE_METADATA_MAPPING,
   TileRepositoryElementType,
 } from "@/types/tile-repository";
-import { createRootMosaicNode, generateNodeId } from "@/utils/mosaic-node-util";
+import { createRootMosaicNode, generateNodeId } from "@/utils/node-utils";
 import { dropRight } from "lodash";
 import { useEffect, useState } from "react";
 import {
